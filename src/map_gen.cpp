@@ -13,6 +13,8 @@ public:
     bool is_valid();
     Map random_generation(); /* Will be pseudo random for now */
     Map rotate(); /* Clockwise */
+    char* to_string();
+    void show();
 };
 
 Map::Map(int size) {
@@ -24,7 +26,7 @@ Map::Map(int size) {
         pieces[i] = new char[size]();
         for (int j = 0; j < size; j++) {
             board_height[i][j] = 0;
-            pieces[i][j] = '0';
+            pieces[i][j] = ' ';
         }
     }
 };
@@ -36,13 +38,6 @@ Map::~Map() {
     }
     delete[] board_height;
     delete[] pieces;
-}
-
-int main() { /* Temporary main for tests */
-
-    Map test_map = Map();
-
-    return 0;
 }
 
 /* EOF */
