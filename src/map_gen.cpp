@@ -6,6 +6,7 @@
 
 #include <cstdlib> // TODO : Might need to change later with an home made random function
 #include <ctime> /* Time to work */
+#include <stdexcept>
 
 class Map {
     int board_size;
@@ -16,7 +17,8 @@ public:
     Map(int = N);
     ~Map();
     bool is_valid();
-    void random_generation(int = 10); /* Will be pseudo random for now */
+    void fully_random_generation(int = 10);
+    void fully_random_valid_generation(int = 10, int = 2048);
     Map rotate(); /* Clockwise */
     char* to_string();
     void show();
@@ -68,13 +70,24 @@ bool Map::is_valid() {
     return true;
 }
 
-void Map::random_generation(int max_height) {
+void Map::fully_random_generation(int max_height) {
     std::srand(std::time(nullptr)); // Graine avec le temps actuel
     for (int i = 0; i < this->board_size; i++) {
         for (int j = 0; j < this->board_size; j++) {
             this->board_height[i][j] = std::rand() % max_height;
         }
     }
+}
+
+void Map::fully_random_valid_generation(int max_height, int max_attempt) {
+    
+    int try_nb = 0;
+    
+    while (try_nb < max_attempt && !this->is_valid()) {
+        this->fully_random_generation(max_height);
+        try_nb += 1;
+    }
+    if (try_nb == max_attempt) {throw std::runtime_error("Failed to generate a valid map in time.");}
 }
 
 /* EOF */
