@@ -1,6 +1,9 @@
 /* The map generator file */
 
 #define N 10 /* The basic board size */
+
+#include "tools.cpp"
+
 #include <cstdlib> // TODO : Might need to change later with an home made random function
 #include <ctime> /* Time to work */
 
@@ -46,19 +49,17 @@ bool Map::is_valid() {
 
     int size = this->board_size;
 
-    auto abs = [](auto a) {if (a < 0) {return -a;} return a;}; /* For fun if we decide to have height in some random comparable to number type */
-
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             if (this->board_height[i][j] < 0) {
                 return false;
-            }else if (i > 0 && j > 0 && abs(this->board_height[i][j] - this->board_height[i-1][j-1]) > 2) { /* Using lazy check for and */
+            }else if (i > 0 && j > 0 && absolute(this->board_height[i][j] - this->board_height[i-1][j-1]) > 2) { /* Using lazy check for and */
                 return false;
-            } else if (i > 0 && j < size-1 && abs(this->board_height[i][j] - this->board_height[i-1][j+1]) > 2) { /* Using lazy check for and */
+            } else if (i > 0 && j < size-1 && absolute(this->board_height[i][j] - this->board_height[i-1][j+1]) > 2) { /* Using lazy check for and */
                 return false;
-            } else if (i < size-1 && j > 0 && abs(this->board_height[i][j] - this->board_height[i+1][j-1]) > 2) { /* Using lazy check for and */
+            } else if (i < size-1 && j > 0 && absolute(this->board_height[i][j] - this->board_height[i+1][j-1]) > 2) { /* Using lazy check for and */
                 return false;
-            } else if (i < size-1 && j < size-1 && abs(this->board_height[i][j] - this->board_height[i+1][j+1]) > 2) { /* Using lazy check for and */
+            } else if (i < size-1 && j < size-1 && absolute(this->board_height[i][j] - this->board_height[i+1][j+1]) > 2) { /* Using lazy check for and */
                 return false;
             } 
         }
