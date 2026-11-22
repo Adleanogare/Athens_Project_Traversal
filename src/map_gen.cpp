@@ -81,7 +81,8 @@ void Map::fully_random_generation(int max_height) {
 
 void Map::fully_random_valid_generation(int max_height, int max_attempt) {
     
-    int try_nb = 0;
+    int try_nb = 1;
+    this->fully_random_generation(max_height);
     
     while (try_nb < max_attempt && !this->is_valid()) {
         this->fully_random_generation(max_height);
