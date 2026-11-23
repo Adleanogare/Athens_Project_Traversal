@@ -1,4 +1,4 @@
-/* The map generator file */
+/* The map class file */
 
 #define N 10 /* The basic board size */
 
@@ -20,7 +20,7 @@ public:
     void fully_random_generation(int = 10);
     void fully_random_valid_generation(int = 10, int = 2048);
     void spread_generation(int = 10);
-    void spread_valid_generation(int = 10, int = 2048);
+    //void spread_valid_generation(int = 10, int = 2048);
     Map rotate(); /* Clockwise */
     char* to_string();
     void show();
@@ -147,6 +147,7 @@ void Map::spread_generation(int max_height) {
     }
 }
 
+/* Useless when doing the math
 void Map::spread_valid_generation(int max_height, int max_attempt) {
     
     int try_nb = 0;
@@ -163,5 +164,6 @@ void Map::spread_valid_generation(int max_height, int max_attempt) {
     }
     if (try_nb == max_attempt) {throw std::range_error("Failed to generate a valid map in time.");}
 }
+*/
 
 /* EOF */
