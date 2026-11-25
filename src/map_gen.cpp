@@ -22,8 +22,8 @@ public:
     void spread_generation(int = 10);
     //void spread_valid_generation(int = 10, int = 2048);
     Map rotate(bool = true); /* Clockwise if true  else the other way around */
-    Map vertical_sym(bool = true); /* Top over bottom if true */
-    Map horizontal_sym(bool = true); /* Left over right if false */
+    Map vertical_sym(bool = true); /* Left over right if false */
+    Map horizontal_sym(bool = true); /* Top over bottom if true */
     Map desc_sym(); /* Top Right over Bottom Left */
     Map asc_sym(); /* Top Left over Bottom Right */
     Map cross_sym(); /* Left over everything */
@@ -193,25 +193,25 @@ Map Map::rotate(bool clockwise) {
     return rotated;
 }
 
-Map Map::rotate(bool clockwise) {
+Map Map::horizontal_sym(bool top_over_bottom) {
 
     int size = this->board_size;
 
-    Map rotated = Map(size);
+    Map hori_sym = Map(size);
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < (size+1)/2; i++) {
         for (int j = 0; j < size; j++) {
-            if (clockwise) {
-                // i=0,j=0 goes to i=0,j=n | i=0,j=n goes to i=n,j=n | i=n,j=n goes to i=n,j=0
-                // i=0,j=k goes to i=k,j=n | i=k,j=0 goes to i=0,j=k | i,j = j,n-i 
-                rotated.board_height[j][size-1-i] = this->board_height[i][j];
+            if (top_over_bottom) { 
+                hori_sym.board_height[i][j] = this->board_height[i][j];
+                hori_sym.board_height[size-1-i][j] =  this->board_height[i][j];
             } else {
-                rotated.board_height[size-1-j][i] = this->board_height[i][j];
+                hori_sym.board_height[i][j] = this->board_height[size-1-i][j];
+                hori_sym.board_height[size-1-i][j] =  this->board_height[size-1-i][j];
             }
         }
     }
 
-    return rotated;
+    return hori_sym;
 }
 
 /* EOF */
