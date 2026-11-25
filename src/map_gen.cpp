@@ -214,4 +214,8 @@ Map Map::horizontal_sym(bool top_over_bottom) {
     return hori_sym;
 }
 
+Map Map::vertical_sym(bool left_over_right) {
+    return this->rotate(left_over_right).horizontal_sym().rotate(!left_over_right);
+} 
+
 /* EOF */
