@@ -222,7 +222,7 @@ Map Map::plus_sym() {
     return this->horizontal_sym().vertical_sym();
 }
 
-Map Map::desc_sym(bool top_left_over) {
+Map Map::asc_sym(bool top_left_over) {
     
     int size = this->board_size;
 
@@ -241,6 +241,10 @@ Map Map::desc_sym(bool top_left_over) {
     }
 
     return sym;
+}
+
+Map Map::desc_sym(bool top_right_over) {
+    return this->rotate(!top_right_over).asc_sym().rotate(top_right_over);
 }
 
 /* EOF */
