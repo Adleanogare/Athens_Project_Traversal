@@ -247,4 +247,8 @@ Map Map::desc_sym(bool top_right_over) {
     return this->rotate(!top_right_over).asc_sym().rotate(top_right_over);
 }
 
+Map Map::cross_sym() {
+    return this->asc_sym().desc_sym(false);
+}
+
 /* EOF */
