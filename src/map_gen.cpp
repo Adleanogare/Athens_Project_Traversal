@@ -216,6 +216,10 @@ Map Map::horizontal_sym(bool top_over_bottom) {
 
 Map Map::vertical_sym(bool left_over_right) {
     return this->rotate(left_over_right).horizontal_sym().rotate(!left_over_right);
-} 
+}
+
+Map Map::plus_sym() {
+    return this->horizontal_sym().vertical_sym();
+}
 
 /* EOF */
