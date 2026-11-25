@@ -24,8 +24,8 @@ public:
     Map rotate(bool = true); /* Clockwise if true  else the other way around */
     Map vertical_sym(bool = true); /* Left over right if false */
     Map horizontal_sym(bool = true); /* Top over bottom if true */
-    Map desc_sym(); /* Top Right over Bottom Left */
-    Map asc_sym(); /* Top Left over Bottom Right */
+    Map desc_sym(bool = true); /* Top Right over Bottom Left */
+    Map asc_sym(bool = true); /* Top Left over Bottom Right */
     Map cross_sym(); /* Left over everything */
     Map plus_sym(); /* Top Left over everything */
     char* to_string();
@@ -220,6 +220,27 @@ Map Map::vertical_sym(bool left_over_right) {
 
 Map Map::plus_sym() {
     return this->horizontal_sym().vertical_sym();
+}
+
+Map Map::desc_sym(bool top_left_over) {
+    
+    int size = this->board_size;
+
+    Map sym = Map(size);
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size-i; j++) {
+            if (top_left_over) { 
+                sym.board_height[i][j] = this->board_height[i][j];
+                sym.board_height[size-1-j][size-1-i] =  this->board_height[i][j];
+            } else {
+                sym.board_height[i][j] = this->board_height[size-1-j][size-1-i];
+                sym.board_height[size-1-j][size-1-i] =  this->board_height[size-1-j][size-1-i];
+            }
+        }
+    }
+
+    return sym;
 }
 
 /* EOF */
